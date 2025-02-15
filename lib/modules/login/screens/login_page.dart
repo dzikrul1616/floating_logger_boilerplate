@@ -27,12 +27,17 @@ class LoginPage extends StatelessWidget {
                     Spacer(),
                     _logo(context),
                     const LoginHeaderText(),
-                    _usernameForm(
-                      username,
+                    CustomTextFormField(
+                      label: "Username",
+                      hintText: "Enter your username",
+                      controller: username,
                     ),
-                    _passwordForm(
-                      isShow,
-                      password,
+                    CustomTextFormField(
+                      label: "Password",
+                      hintText: "Enter your password",
+                      controller: password,
+                      isPassword: true,
+                      isObscure: isShow,
                     ),
                     const SizedBox(
                       height: 30,
@@ -67,124 +72,6 @@ class LoginPage extends StatelessWidget {
             "assets/logo.gif",
             width: 250,
             fit: BoxFit.fill,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _usernameForm(
-    TextEditingController username,
-  ) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.grey[100],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Username',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            TextFormField(
-              controller: username,
-              style: GoogleFonts.montserrat(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-              ),
-              validator: (e) {
-                if (e!.isEmpty) {
-                  return "Username Tidak Boleh Kosong!";
-                }
-                return null;
-              },
-              decoration: const InputDecoration.collapsed(
-                hintText: "Username",
-                filled: true,
-                fillColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _passwordForm(
-    ValueNotifier<bool> isShow,
-    TextEditingController password,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.grey[100],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Password',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-              const SizedBox(
-                height: 5.0,
-              ),
-              ValueListenableBuilder(
-                  valueListenable: isShow,
-                  builder: (context, show, child) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: password,
-                            obscureText: show,
-                            validator: (e) {
-                              if (e!.isEmpty) {
-                                return "Password Tidak Boleh Kosong!";
-                              }
-                              return null;
-                            },
-                            style: GoogleFonts.montserrat(
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            decoration: const InputDecoration.collapsed(
-                              hintText: "Password",
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                            ),
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () => isShow.value = !show,
-                          icon: Icon(
-                            show ? Icons.visibility_off : Icons.remove_red_eye,
-                          ),
-                        )
-                      ],
-                    );
-                  }),
-            ],
           ),
         ),
       ),

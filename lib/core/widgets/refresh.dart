@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
+import 'package:floating_logger_boilerplate/packages/packages.dart';
 
 class CustomRefresh extends StatelessWidget {
   const CustomRefresh({

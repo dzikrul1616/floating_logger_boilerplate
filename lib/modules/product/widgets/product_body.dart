@@ -74,8 +74,11 @@ class ProductBody extends StatelessWidget {
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10),
                                     ),
-                                    child: Image.network(
-                                      item.image!,
+                                    child: Hero(
+                                      tag: '${item.id}',
+                                      child: Image.network(
+                                        item.image!,
+                                      ),
                                     )),
                               ),
                             ),

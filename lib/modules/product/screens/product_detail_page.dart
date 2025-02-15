@@ -90,7 +90,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         });
   }
 
-  Padding _body() {
+  Widget _body() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -195,15 +195,18 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
-  Stack _header(BuildContext context, bool value) {
+  Widget _header(BuildContext context, bool value) {
     return Stack(
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 300,
-          child: Image.network(
-            data!.image!,
-            fit: BoxFit.contain,
+          child: Hero(
+            tag: '${data!.id}',
+            child: Image.network(
+              data!.image!,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
         Positioned(

@@ -24,7 +24,7 @@ class LoginBottomNotes extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(
-                  "*Note :\nYoucan login with this account :\nusername : mor_2314\npass : 83r5^_'",
+                  "*Note :\nYou can login with this account :\nusername : mor_2314\npass : 83r5^_'",
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey[600],

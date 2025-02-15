@@ -7,13 +7,13 @@ class RouteGenerator {
   }) =>
       MaterialPageRoute(builder: (_) {
         bool show = getIt<EnvServer>().isShowFloatingLogger;
-        return isWithoutTest && show
-            ? page
-            : FloatingLoggerControl(
+        return isWithoutTest == false && show
+            ? FloatingLoggerControl(
                 getPreference: () async =>
                     await getIt<CustomLocalPref>().getDebugger(),
                 child: page,
-              );
+              )
+            : page;
       });
 
   static Route<dynamic> generateRoute(

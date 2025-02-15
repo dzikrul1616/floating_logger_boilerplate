@@ -98,15 +98,17 @@ class _ProductListPageState extends State<ProductListPage> {
               onPressed: () => isSearch.value = !search,
               icon: const Icon(Icons.search),
             ),
-      IconButton(
-        onPressed: () => Navigator.pushReplacementNamed(
-          context,
-          SettingPage.routeName,
-        ),
-        icon: Icon(
-          Icons.settings,
-        ),
-      ),
+      getIt<EnvServer>().isShowFloatingLogger
+          ? IconButton(
+              onPressed: () => Navigator.pushReplacementNamed(
+                context,
+                SettingPage.routeName,
+              ),
+              icon: Icon(
+                Icons.settings,
+              ),
+            )
+          : const SizedBox.shrink(),
       IconButton(
         onPressed: () => CustomDialog.dialogInfo(
           context,
