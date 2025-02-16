@@ -116,20 +116,23 @@ class _ProductListPageState extends State<ProductListPage> {
           context,
           "Are you sure want to logout?",
           () {
-            try {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: Colors.green,
-                  content: Text('Success logout'),
-                ),
-              );
-              getIt<CustomLocalPref>().clearToken();
-            } finally {
-              Navigator.pushNamed(
-                context,
-                LoginPage.routeName,
-              );
-            }
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                backgroundColor: Colors.green,
+                content: Text('Success logout'),
+              ),
+            );
+            getIt<CustomLocalPref>().clearToken().then(
+              (value) {
+                if (context.mounted) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    LoginPage.routeName,
+                    (route) => false,
+                  );
+                }
+              },
+            );
           },
         ),
         icon: Icon(

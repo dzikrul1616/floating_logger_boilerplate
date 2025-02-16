@@ -19,7 +19,7 @@ class _SettingPageState extends State<SettingPage> {
 
   Future<void> getSettings() async {
     try {
-      bool pref = await newMethod();
+      bool pref = await getPref();
       setState(() {
         isShowDebuggerNotifier.value = pref;
         preferences = true;
@@ -29,23 +29,35 @@ class _SettingPageState extends State<SettingPage> {
     }
   }
 
-  Future<bool> newMethod() async {
+  Future<bool> getPref() async {
     return await getIt<CustomLocalPref>().getDebugger();
   }
 
   @override
   Widget build(BuildContext context) {
     return FloatingLoggerControl(
-      getPreference: newMethod,
+      getPreference: getPref,
       isShow: isShowDebuggerNotifier,
       child: PopScope(
         canPop: false,
         // ignore: deprecated_member_use
         onPopInvoked: (_) {
-          Navigator.pushReplacementNamed(context, ProductListPage.routeName);
+          Navigator.pushNamed(
+            context,
+            ProductListPage.routeName,
+          );
         },
         child: Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  ProductListPage.routeName,
+                );
+              },
+              icon: Icon(Icons.arrow_back),
+            ),
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
             title: Text(
               "Setting",

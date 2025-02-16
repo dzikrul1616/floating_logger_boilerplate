@@ -30,9 +30,10 @@ class _SplashPageState extends State<SplashPage> {
       Future.delayed(const Duration(seconds: 4), () {
         toPage().then((value) {
           if (mounted) {
-            Navigator.pushReplacementNamed(
+            Navigator.pushNamedAndRemoveUntil(
               context,
               value,
+              (route) => false,
             );
           }
         });

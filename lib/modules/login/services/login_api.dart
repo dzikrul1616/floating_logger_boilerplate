@@ -26,7 +26,7 @@ class LoginApi {
               content: Text('Success login'),
             ),
           );
-          Navigator.pushNamed(
+          Navigator.pushReplacementNamed(
             context,
             ProductListPage.routeName,
           );
