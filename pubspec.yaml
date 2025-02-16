@@ -7,9 +7,9 @@ environment:
   sdk: ^3.6.2
 
 dependencies:
-  cupertino_icons: ^1.0.8
   custom_refresh_indicator: ^4.0.1
-  floating_logger: ^0.1.2
+  cupertino_icons: ^1.0.8
+  floating_logger: ^0.1.3
   flutter:
     sdk: flutter
   get_it: ^8.0.3

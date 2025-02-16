@@ -117,10 +117,10 @@ packages:
     dependency: "direct main"
     description:
       name: floating_logger
-      sha256: "82511668e1e21cc905ad613f5330a440ee589eb66195e9fb01bde85b5d09776b"
+      sha256: "46c1e004c145da1d45ea5c78f3c2877e7064807d0d818ea4f2a39732f70ff5e1"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.2"
+    version: "0.1.3"
   flutter:
     dependency: "direct main"
     description: flutter
