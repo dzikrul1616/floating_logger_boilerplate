@@ -179,7 +179,10 @@ class _ProductListPageState extends State<ProductListPage> {
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: GestureDetector(
-                          onTap: () => isSearch.value = !search,
+                          onTap: () {
+                            isSearch.value = !search;
+                            filterSearch('');
+                          },
                           child: Icon(
                             Icons.close,
                             color: Colors.grey[800],
