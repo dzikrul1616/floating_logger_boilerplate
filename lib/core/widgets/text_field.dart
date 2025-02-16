@@ -67,9 +67,9 @@ class CustomTextFormField extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            IconButton(
-                              onPressed: () => isObscure!.value = !show,
-                              icon: Icon(
+                            GestureDetector(
+                              onTap: () => isObscure!.value = !show,
+                              child: Icon(
                                 show
                                     ? Icons.visibility_off
                                     : Icons.remove_red_eye,

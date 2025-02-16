@@ -42,52 +42,54 @@ class _ProductListPageState extends State<ProductListPage> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: isSearch,
-        builder: (context, search, child) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              surfaceTintColor: Colors.white,
-              automaticallyImplyLeading: false,
-              actions: _actionAppbar(search, context),
-              title: _titleAppbar(search),
+      valueListenable: isSearch,
+      builder: (context, search, child) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
+            automaticallyImplyLeading: false,
+            actions: _actionAppbar(search, context),
+            title: _titleAppbar(search),
+          ),
+          backgroundColor: const Color(0xffF0F0F0),
+          body: Padding(
+            padding: const EdgeInsets.all(12),
+            child: ValueListenableBuilder(
+              valueListenable: isLoading,
+              builder: (context, loading, child) {
+                return loading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : CustomRefresh(
+                        onRefresh: () async =>
+                            ProductApi.fetchList(isLoading, context)
+                                .then((result) {
+                          if (mounted) {
+                            setState(() {
+                              data = result;
+                              filteredData = List.from(data ?? []);
+                            });
+                          }
+                        }),
+                        child: ListView(
+                          children: [
+                            const ProductHeader(),
+                            filteredData!.isEmpty
+                                ? const ListProductEmpty()
+                                : ProductBody(
+                                    filteredData: filteredData,
+                                  ),
+                          ],
+                        ),
+                      );
+              },
             ),
-            backgroundColor: const Color(0xffF0F0F0),
-            body: Padding(
-              padding: const EdgeInsets.all(12),
-              child: ValueListenableBuilder(
-                  valueListenable: isLoading,
-                  builder: (context, loading, child) {
-                    return loading
-                        ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : CustomRefresh(
-                            onRefresh: () async =>
-                                ProductApi.fetchList(isLoading, context)
-                                    .then((result) {
-                              if (mounted) {
-                                setState(() {
-                                  data = result;
-                                  filteredData = List.from(data ?? []);
-                                });
-                              }
-                            }),
-                            child: ListView(
-                              children: [
-                                const ProductHeader(),
-                                filteredData!.isEmpty
-                                    ? const ListProductEmpty()
-                                    : ProductBody(
-                                        filteredData: filteredData,
-                                      ),
-                              ],
-                            ),
-                          );
-                  }),
-            ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   List<Widget> _actionAppbar(bool search, BuildContext context) {
